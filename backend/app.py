@@ -24,9 +24,14 @@ from verifyToken import verifyToken
 from flask import request
 import os
 
+from flask_cors import CORS, cross_origin
+
+
+
 cred = credentials.Certificate("./fbAdminConfig.json")
 firebase_admin.initialize_app(cred)
 
+cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 db = SQLAlchemy(app)
 
