@@ -1,3 +1,4 @@
+
 const Transrecord = (props)=>{
   const account = props.account
 
@@ -60,4 +61,3 @@ document.getElementById("add-trans").addEventListener("click", function(){
   
   document.getElementById("delete-trans").addEventListener("click", function(){
     window.location= "/frontend/delete-trans.html";
-  })
