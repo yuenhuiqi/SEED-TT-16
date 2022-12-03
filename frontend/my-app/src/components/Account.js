@@ -1,5 +1,5 @@
 import AccountHeader from "./AccountHeader"
-import Addtrans from './Addtrans'
+
 import Transrecord from "./Transrecord"
 
 const Account = (props)=>{
@@ -17,7 +17,7 @@ const Account = (props)=>{
                                 accountId={account.id}
                                 accountBalance={account.balance}/>
 
-                            {/* <Transrecord account={account}/>  */}
+                              <Transrecord account={account}/> 
                         </>
                     )}
 
