@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../context/userContext';
 
-const Login = () => {
+const Login = ({ setIsLogin }) => {
   const { user, signInEmailAndPassword } = useUserContext();
 
   const [email, setEmail] = useState('');
@@ -16,6 +16,9 @@ const Login = () => {
     }
 
     signInEmailAndPassword(email, password)
+    if (user) {
+      setIsLogin(1)
+    }
   };
 
   return (
