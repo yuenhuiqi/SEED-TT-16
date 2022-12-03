@@ -3,6 +3,8 @@ const Account = (props)=>{
     return(
         <>
 
+            <AccountHeader />
+            <Transrecord />
         </>
     )
 }
