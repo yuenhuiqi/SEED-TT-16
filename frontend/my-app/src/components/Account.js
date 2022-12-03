@@ -2,15 +2,15 @@ import AccountHeader from "./AccountHeader"
 
 
 const Account = (props)=>{
-    const accountList = props.accountList
+    const accountInfo = props.accountInfo
     return(
 
-            accountList.map((account)=>{
+            props.accountInfo.map((accountInfo)=>{
                     return(
                         <>
 
                             <AccountHeader 
-                                account = {account}/>
+                                accountInfo = {accountInfo}/>
 
                             
                         </>
