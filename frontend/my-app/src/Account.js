@@ -1,3 +1,6 @@
+import AccountHeader from "./AccountHeader"
+import Addtrans from './Addtrans'
+
 const Account = (props)=>{
     const accountList = props.accountList
     const handleAddTrans = props.handleAddTrans

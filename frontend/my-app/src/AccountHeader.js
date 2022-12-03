@@ -7,7 +7,7 @@ const AccountHeader = (props)=>{
         <div>
             <p>Type: {accountType}</p>
             <p>ID: {accountId}</p>
-            <p>Balance: {accountType}</p>
+            <p>Balance: {accountBalance}</p>
         </div>
     )
 }
