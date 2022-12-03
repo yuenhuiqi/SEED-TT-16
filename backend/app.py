@@ -12,10 +12,11 @@ from firebase_admin import credentials
 
 from user import User
 from account import Account
-
+from verifyToken import verifyToken
+from flask import request
 import os
 
-cred = credentials.Certificate("path/to/serviceAccountKey.json")
+cred = credentials.Certificate("./fbAdminConfig.json")
 firebase_admin.initialize_app(cred)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -30,11 +31,16 @@ def hello():
 
 @app.route('/getAccountInfo/<user_id>', methods=['GET'])
 def getAllAccounts(user_id):
-    accounts = Account.query.filter_by(UserID=user_id)
-    accList = []
-    for acc in accounts: 
-        accList.append({'accountID': acc.AccountID, 'userID': acc.UserID, 'accountType': acc.AccountType, 'accountBalance': acc.AccountBalance})
-    return jsonify(accList) 
+    token = request.headers.get('token')
+    uid = request.headers.get('uid')
+
+    if verifyToken(token,uid):    
+        accounts = Account.query.filter_by(UserID=user_id)
+        accList = []
+        for acc in accounts: 
+            accList.append({'accountID': acc.AccountID, 'userID': acc.UserID, 'accountType': acc.AccountType, 'accountBalance': acc.AccountBalance})
+        return jsonify(accList) 
+    return jsonify({'error': 'Invalid token'}), status.HTTP_401_UNAUTHORIZED
 
 
 # 2. Get list of transaction details based on User's ID (userID > accountID > Transactions)
