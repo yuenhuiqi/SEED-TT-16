@@ -22,9 +22,8 @@
 
     </div>
     <div id="buttons">
-            <button type="button" id = "top-up">Top Up</button>  
-            <br> </br>
-            <button type="button" id="withdraw">Withdraw</button>
+            <button type="button" id ="add-trans">Add Transaction</button>  
+            <button type="button" id="delete-trans">Delete Transaction</button>
     </div>
     
        <div id="previous-transaction">
@@ -33,6 +32,7 @@
            <table class="table">
             <thead>
               <tr>
+                <th scope="col">Select</th>
                 <th scope="col">Date</th>
                 <th scope="col">Transaction Reference (Purchase/Transfer)</th>
                 <th scope="col">Amount</th>
@@ -41,18 +41,21 @@
             </thead>
             <tbody>
               <tr>
+                <td><input type="checkbox" name="name1" />&nbsp;</td>
                 <th scope="row">14/9/2022</th>
                 <td>Mark</td>
                 <td>50</td>
                 <td>hello</td>
               </tr>
               <tr>
+                <td><input type="checkbox" name="name2" />&nbsp;</td>
                 <th scope="row">12/9/2022</th>
                 <td>Jacob</td>
                 <td>100</td>
                 <td>hello</td>
               </tr>
               <tr>
+                <td><input type="checkbox" name="name3" />&nbsp;</td>
                 <th scope="row">10/9/2022</th>
                 <td>Daniel</td>
                 <td>0</td>
@@ -63,10 +66,14 @@
        </div>
     <br> </br> 
 
+        <div id="buttons">
+            <button type="button" id = "view-more">View More</button>
+    </div>
+
   </div>
   </body>
 
-<script src="/frontend/dashboard.js" ></script>
+<script src="/frontend/App.js" ></script>
 
 <!-- <a href="index1.html">Click here to login</a> -->
 </html>

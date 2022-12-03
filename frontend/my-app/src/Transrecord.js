@@ -1,17 +1,8 @@
-const Post = (props)=>{
-    const posts = props.posts; 
-    console.log(props.posts)
-    return(
-            posts.map((post) => {
-                return(
-                <div key={post.id}>
-                    <p className="post">{post.text}</p>
-                    <button onClick={() => props.delete(post.id)}>Delete Post</button>
-                </div>
-                )
-                }
-            )
-    )
-}
-
-export default Post;
+document.getElementById("add-trans").addEventListener("click", function(){
+    console.log("hello");
+    window.location= "/frontend/add-trans.html";
+  })
+  
+  document.getElementById("delete-trans").addEventListener("click", function(){
+    window.location= "/frontend/delete-trans.html";
+  })
