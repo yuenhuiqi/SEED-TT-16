@@ -8,9 +8,7 @@ const Account = (props)=>{
             accountList.map((account)=>{
                     return(
                         <>
-                            {/* <Addtrans 
-                                accountId={account.id}
-                            /> */}
+
                             <AccountHeader 
                                 account = {account}/>
 
