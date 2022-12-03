@@ -1,3 +1,16 @@
+const Transrecord = (props)=>{
+  const account = props.account
+
+  return(
+    
+  )
+
+}
+
+export default Transrecord
+
+
+
 document.getElementById("add-trans").addEventListener("click", function(){
     console.log("hello");
     window.location= "/frontend/add-trans.html";
