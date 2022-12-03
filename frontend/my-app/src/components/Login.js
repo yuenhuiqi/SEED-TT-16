@@ -1,35 +1,46 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useUserContext } from '../context/userContext';
 
-const Login = ({ onAdd }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+const Login = () => {
+  const { user, signInEmailAndPassword } = useUserContext();
 
-    const onLogin = (e) => {}
-        e.preventDefault()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-        if(!password) {
-            alert('Please fill in your login details')
-            return
-        }
+  const onLogin = async (e) => {
+    e.preventDefault();
 
-    onAdd({ email,password })
+    if (!password) {
+      alert('Please fill in your login details');
+      return;
+    }
 
-    setEmail('')
-    setPassword('')
+    signInEmailAndPassword(email, password)
+  };
 
   return (
-    <form onLogin={onLogin}>
-        <div>
-            <label>Email</label>
-            <input type='text' placeholder='Insert Email' value={text} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-            <label>Password</label>
-            <input type='text' placeholder='Insert Password' value={text} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <input type='submit' value='Login'/>
+    <form>
+      <div>
+        <label>Email</label>
+        <input
+          type="text"
+          placeholder="Insert Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Password</label>
+        <input
+          type="text"
+          placeholder="Insert Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button onClick={onLogin}>Login</button>
     </form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

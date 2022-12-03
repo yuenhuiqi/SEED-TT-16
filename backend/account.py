@@ -4,7 +4,7 @@ class Account(db.Model):
     __tablename__ = 'BankAccount'
 
     AccountID = db.Column(db.Integer(), primary_key=True)
-    UserID = db.Column(db.Integer(), foreign_key = True)
+    UserID = db.Column(db.Integer(), nullable=False)
     AccountType = db.Column(db.String(255), nullable=False)
     AccountBalance = db.Column(db.Float(), nullable=False)
     

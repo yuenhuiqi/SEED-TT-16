@@ -3,7 +3,8 @@ import {useState} from 'react'
 
 
 const AccountTransaction = (props)=>{
-    const [accountList, useAccountList] = useState([0,1])
+    const [accountList, useAccountList] = useState([[{userid: "Sam", id: 123, type: "abc", balance:12345 ,date: '17 Oct 2010', receipient: 241241, amount: 12331, comment:'testing'},
+     {userid: "Sam", id:1234, type: "test", balance: 2321, date: '17 Oct 2012', receipient: 241241, amount: 12331, comment:'testing'}]])
 
 
     return(

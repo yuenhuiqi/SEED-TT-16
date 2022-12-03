@@ -2,3 +2,4 @@ backend/.vercel
 backend/__pycache__
 backend/venv
 backend_express/node_modules
+frontend/my-app/node_modules

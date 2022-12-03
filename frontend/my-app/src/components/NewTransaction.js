@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-date-picker';
+import DatePicker from 'react-date-picker'
 import CurrencyInput from 'react-currency-input-field';
 
 function NewTransaction() {
