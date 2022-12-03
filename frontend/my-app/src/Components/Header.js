@@ -1,14 +1,29 @@
 import "./Header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserForm from "./UserForm";
+import { useUserContext } from '../context/userContext';
+import axios from "axios"
 
 
 const Header = () => {
-   const getAccountInfo = async () => {
-        const response = await localhost.get(`/getUserDetails/{props.user_id}`);
-        console.log(response.data);
-        setData(response.data.message);
-    }
+  const { user } = useUserContext();
+  useEffect(() => {
+    axios.get(`http://localhost:5000/getUserDetails/${user.uid}`)
+    .then(res => {
+        console.log(res.data)
+    })
+  }
+  )
+
+
+
+
+  //  const getAccountInfo = async () => {
+  //       const auth_id = localStorage.getItem('AuthID')
+  //       const response = await localhost.get(`/getUserDetails/${auth_id}`);
+  //       console.log(response.data);
+  //       setData(response.data.message);
+  //   }
   const [isEditing, setIsEditing] = useState(false);
 
 //   const saveUserDetailsHandler = (enteredUserData) => {
