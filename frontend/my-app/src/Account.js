@@ -10,7 +10,7 @@ const Account = (props)=>{
                     return(
                         <>
                             <Addtrans 
-                                accountId={accountId}
+                                accountId={account.id}
                                 handleAddTrans={()=> handleAddTrans(id, receipient, date, amount, comments)}
                             />
                             <AccountHeader 
