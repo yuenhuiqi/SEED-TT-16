@@ -38,7 +38,8 @@ h1{
     justify-content:space-between;
 }
 
-#top-up{
+
+#add-trans{
     background-color: green; 
     border: none;
     color: white;
@@ -50,7 +51,8 @@ h1{
     margin-right:10px;
 }
 
-#withdraw{
+
+#delete-trans{
     background-color: red; 
     border: none;
     color: white;
