@@ -89,15 +89,15 @@ def DeleteTransaction(transaction_id):
         return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
 
 # 5. GET of User info, based on User's ID 
-@app.route('/getUserDetails/<user_id>', methods=['GET'])
-def getUserDetails(user_id):
-    user = User.query.filter_by(UserID=user_id).first()
+@app.route('/getUserDetails/<auth_id>', methods=['GET'])
+def getUserDetails(auth_id):
+    user = User.query.filter_by(AuthID=auth_id).first()
     return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 # 6. UPDATE of User info, based on User's ID 
-@app.route("/updateUserInfo/<user_id>/<email>/<address>", methods=["PUT"])
-def updateUserInfo(user_id, email, address):
-    user = db.session.query(User).filter_by(UserID=user_id).first()
+@app.route("/updateUserInfo/<auth_id>/<email>/<address>", methods=["PUT"])
+def updateUserInfo(auth_id, email, address):
+    user = db.session.query(User).filter_by(AuthID=auth_id).first()
     try: 
         user.Email = email
         user.Address = address
