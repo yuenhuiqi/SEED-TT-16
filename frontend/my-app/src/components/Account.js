@@ -13,9 +13,7 @@ const Account = (props)=>{
                                 accountId={account.id}
                             /> */}
                             <AccountHeader 
-                                accountType={account.type}
-                                accountId={account.id}
-                                accountBalance={account.balance}/>
+                                account = {account}/>
 
                               <Transrecord account={account}/> 
                         </>
