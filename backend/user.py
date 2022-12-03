@@ -10,7 +10,7 @@ class User(db.Model):
     last_name = db.Column(db.String(2555), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique = True)
     address = db.Column(db.String(255), nullable=False)
-    OptIntoPhyStatements = db.Integer, nullable=False)
+    OptIntoPhyStatements = (db.Integer, nullable=False)
 
     def __init__(self, userID, userName, role):
         self.userID = userID
