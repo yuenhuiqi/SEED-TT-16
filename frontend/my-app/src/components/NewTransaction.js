@@ -14,7 +14,7 @@ function NewTransaction() {
         return;
     }
   return (
-    <div>
+    <div style={{border: '1px solid black', margin: '20px'}}>
         <h1>New Transaction</h1>
         <form style={{display: 'flex', flexDirection: 'column', alignContent: 'flex-start'}}>
             <label>
@@ -31,7 +31,7 @@ function NewTransaction() {
                     placeholder="Please enter an amount"
                     allowDecimals={true}
                     prefix='$'
-                    defaultValue={0}
+                    // defaultValue={0}
                     fixedDecimalLength={2}
                     onValueChange={setAmount}
                 />
@@ -41,7 +41,7 @@ function NewTransaction() {
                 <textarea name={comment} onChange={setComment} style={{marginLeft: '10px'}} />
             </label>
             {/* <input type="submit" value="Submit" onClick={handleSubmit} style={{marginTop: '20px', width: '15%', alignSelf: 'center'}} /> */}
-            <button onClick={() => {console.log("test")}} style={{marginTop: '20px', width: '15%', alignSelf: 'center'}} >
+            <button onClick={handleSubmit} style={{margin: '20px', width: '15%', alignSelf: 'center'}} >
                 submit
             </button>
         </form>
