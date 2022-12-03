@@ -79,17 +79,8 @@ def addTransaction(account_id, receiving_account_id, date, transaction_amount, c
 # 4. Delete using TransactionID + AccountID
 @app.route('/DeleteTransaction/<account_id>/<transaction_id>', methods = ['DELETE'])
 def DeleteTransaction(account_id,transaction_id):
-    transactions = Transaction.query.filter_by(AccountID=account_id)
-    idList = []
-    for trans in transactions:
-        idList.append(trans.TransactionID) 
-    #return (idList)
-    if int(transaction_id) in idList: #check if transaction id is in the account
-        db.session.delete(transactions)
-        db.session.commit()
-        return jsonify(message = "Transaction deleted.")
-    else:
-        return jsonify(message="Transaction does not exist.")
+    Transaction.query.filter_by(TransactionID = transaction_id).delete()
+    return jsonify(200)
 
 
 # 5. GET of User info, based on User's ID 
