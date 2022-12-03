@@ -27,7 +27,7 @@ cred = credentials.Certificate("./fbAdminConfig.json")
 firebase_admin.initialize_app(cred)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
-# db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 @app.route('/')
 def hello():
