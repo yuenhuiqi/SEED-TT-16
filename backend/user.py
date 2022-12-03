@@ -3,22 +3,22 @@ from database import *
 class User(db.Model):
     __tablename__ = 'User'
 
-    userID = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String(20), nullable = False)
-    password = db.Column(db.String(20), nullable=False)
-    first_name = db.Column(db.String(255), nullable=False)
-    last_name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), nullable=False, unique = True)
-    address = db.Column(db.String(255), nullable=False)
+    UserID = db.Column(db.Integer, primary_key=True)
+    Username = db.Column(db.String(20), nullable = False)
+    Password = db.Column(db.String(20), nullable=False)
+    Firstname = db.Column(db.String(255), nullable=False)
+    Lastname = db.Column(db.String(255), nullable=False)
+    Email = db.Column(db.String(255), nullable=False, unique = True)
+    Address = db.Column(db.String(255), nullable=False)
     OptIntoPhyStatements = db.Column(db.Integer(), nullable=False)
 
-    def __init__(self, userID, userName, password, first_name, last_name, email, address, OptIntoPhyStatements):
-        self.userID = userID
-        self.userName = userName
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.address = address
+    def __init__(self, UserID, Username, Password, Firstname, Lastname, Email, Address, OptIntoPhyStatements):
+        self.UserID = UserID
+        self.Username = Username
+        self.Password = Password
+        self.Firstname = Firstname
+        self.Lastname = Lastname
+        self.Email = Email
+        self.Address = Address
         self.OptIntoPhyStatements = OptIntoPhyStatements
 

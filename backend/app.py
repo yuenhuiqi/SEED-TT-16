@@ -37,8 +37,8 @@ def hello():
 # 5. GET + UPDATE of User info, based on User's ID 
 @app.route('/getUserDetails/<user_id>', methods=['GET'])
 def getUserDetails(user_id):
-    user = User.query.filter_by(userID=user_id).first()
-    return jsonify({'firstName': user.first_name, 'lastName': user.last_name, 'email': user.email, 'address': user.address})
+    user = User.query.filter_by(UserID=user_id).first()
+    return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 
 
