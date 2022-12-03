@@ -5,10 +5,15 @@ import {useState} from 'react'
 const AccountTransaction = (props)=>{
     const [accountList, useAccountList] = useState([])
 
+    const handleAddTrans = (id, receipient, date, amount, comments) => {
+
+    }
+
     return(
         <>
-            <Addtrans />
-            <Account accountList={accountList}/>
+            <Account 
+                accountList={accountList}
+                handleAddTrans={()=>handleAddTrans(id, receipient, date, amount, comments)}/>
         </>
     )
 }
