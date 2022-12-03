@@ -1,6 +1,6 @@
 
 const Transrecord = (props)=>{
-  const account = props.account
+  const transactionInfo = props.transactionInfo
 
   return(
     <body>
@@ -18,12 +18,12 @@ const Transrecord = (props)=>{
             <h3>Transactions History: </h3>
         </div>
         
-        {account.map((trans) => {
+        {transactionInfo.map((trans) => {
             return (
                 <>
                 <p>Date: {trans.date}</p>
-                <p>Receipient: {trans.receipient}</p>
-                <p>Amount: {trans.amount}</p>
+                <p>Receipient: {trans.receivingAccountID}</p>
+                <p>Amount: {trans.transactionAmount}</p>
                 <p>Comment: {trans.comment}</p>        
                 </>
             )

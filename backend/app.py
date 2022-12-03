@@ -1,6 +1,7 @@
 from flask import Flask 
 from flask import Flask, redirect, url_for, render_template, request, session, jsonify, flash, current_app, make_response, abort
 # from flask_cors import CORS, cross_origin
+from functools import wraps
 
 from database import app
 # from flask_cors import CORS
@@ -23,13 +24,29 @@ from verifyToken import verifyToken
 from flask import request
 import os
 
+from flask_cors import CORS, cross_origin
+
+
+
 cred = credentials.Certificate("./fbAdminConfig.json")
 firebase_admin.initialize_app(cred)
 
+cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 db = SQLAlchemy(app)
 
+def check_token(f):
+    @wraps(f)
+    def wrap(*args,**kwargs):
+        token = request.headers.get('token')
+        uid = request.headers.get('uid')
+        if verifyToken(token,uid):
+            return f(*args,**kwargs)
+        return jsonify({'error': 'Invalid token'})
+    return wrap
+
 @app.route('/')
+@check_token
 def hello():
 	return jsonify({'text': "hello!"})
 
@@ -37,21 +54,21 @@ def hello():
 # 1. Get list of account information based on User's ID (one user can have multiple bank account)
 
 @app.route('/getAccountInfo/<user_id>', methods=['GET'])
+@check_token
 def getAllAccounts(user_id):
-    token = request.headers.get('token')
-    uid = request.headers.get('uid')
 
-    if verifyToken(token,uid):    
-        accounts = Account.query.filter_by(UserID=user_id)
-        accList = []
-        for acc in accounts: 
-            accList.append({'accountID': acc.AccountID, 'userID': acc.UserID, 'accountType': acc.AccountType, 'accountBalance': acc.AccountBalance})
-        return jsonify(accList) 
-    return jsonify({'error': 'Invalid token'}), status.HTTP_401_UNAUTHORIZED
+    # if verifyToken(token,uid):    
+    accounts = Account.query.filter_by(UserID=user_id)
+    accList = []
+    for acc in accounts: 
+        accList.append({'accountID': acc.AccountID, 'userID': acc.UserID, 'accountType': acc.AccountType, 'accountBalance': acc.AccountBalance})
+    return jsonify(accList) 
+    # return jsonify({'error': 'Invalid token'}), status.HTTP_401_UNAUTHORIZED
 
 
 # 2. Get list of transaction details based on User's ID (accountID > Transactions)
 @app.route('/getScheduledTransactions/<account_id>', methods=['GET'])
+@check_token
 def getScheduledTransactions(account_id):
     
     transactions = Transaction.query.filter_by(AccountID=account_id)
@@ -62,6 +79,7 @@ def getScheduledTransactions(account_id):
 
 # 3. Insert into scheduled_transaction table Transaction ID, AccountID, ReceivingAccountID, Date, TransactionAmount, Comment
 @app.route('/addTransaction/<account_id>/<receiving_account_id>/<date>/<transaction_amount>/<comment>', methods=['POST'])
+@check_token
 def addTransaction(account_id, receiving_account_id, date, transaction_amount, comment):
 
     max_num = Transaction.query.order_by(Transaction.TransactionID.desc()).first().TransactionID
@@ -78,6 +96,7 @@ def addTransaction(account_id, receiving_account_id, date, transaction_amount, c
     
 # 4. Delete using TransactionID + AccountID
 @app.route('/deleteTransaction/<transaction_id>', methods = ['DELETE'])
+@check_token
 def DeleteTransaction(transaction_id):
     
     try: 
@@ -90,12 +109,14 @@ def DeleteTransaction(transaction_id):
 
 # 5. GET of User info, based on User's ID 
 @app.route('/getUserDetails/<auth_id>', methods=['GET'])
+@check_token
 def getUserDetails(auth_id):
     user = User.query.filter_by(AuthID=auth_id).first()
     return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 # 6. UPDATE of User info, based on User's ID 
 @app.route("/updateUserInfo/<auth_id>/<email>/<address>", methods=["PUT"])
+@check_token
 def updateUserInfo(auth_id, email, address):
     user = db.session.query(User).filter_by(AuthID=auth_id).first()
     try: 

@@ -10,6 +10,8 @@ const Login = ({ setIsLogin }) => {
   const onLogin = async (e) => {
     e.preventDefault();
 
+    localStorage.setItem('AuthID', user.uid)
+
     if (!password) {
       alert('Please fill in your login details');
       return;
