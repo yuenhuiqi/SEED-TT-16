@@ -12,4 +12,4 @@ const AccountHeader = (props)=>{
     )
 }
 
-export default Account;
+export default AccountHeader;
