@@ -5,7 +5,7 @@ const Account = (props)=>{
     const accountInfo = props.accountInfo
     return(
 
-            accountList.map((account)=>{
+            props.accountInfo.map((accountInfo)=>{
                     return(
                         <>
 

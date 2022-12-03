@@ -5,16 +5,17 @@ const AccountHeader = (props)=>{
 
     // }
     const accountInfo = props.accountInfo
+    // const transactionInfo = props.transactionInfo
     return(
         <div>
 
-            {props.account.info.map((accountInfo) => 
+            {props.accountInfo.map((accountInfo) => 
                     <div>
-                        <button onClick={()=> handleDelete(accountInfo.accountID,props.user)}>Delete Transaction</button>
+                        {/* <button onClick={()=> handleDelete(accountInfo.accountID,props.user)}>Delete Transaction</button> */}
                         <p>Type: {accountInfo.accountType}</p>
                         <p>ID: {accountInfo.accountID}</p>
                         <p>Balance: {accountInfo.accountBalance}</p>
-                        <Transrecord transactionInfo={props.transactionInfo}/> 
+                        {/* <Transrecord transactionInfo={props.transactionInfo}/>  */}
                     
 
                     </div>

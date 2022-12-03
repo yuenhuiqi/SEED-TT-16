@@ -1,6 +1,7 @@
 import Account from './Account.js'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useUserContext } from '../context/userContext.js';
+import localhost from '../localhost.js';
 
 
 
@@ -10,31 +11,30 @@ const AccountTransaction = (props)=>{
  
     
      const [accountInfo, setAccountInfo] = useState("")
-     const [transactionInfo, setTransactionInfo] = useState("")
+
+     const getAccountInfo = async () => {
+        // const response = await localhost.get(`/getAccountInfo/${user}`);
+        // console.log(response.data);
+        // setAccountInfo(response.data);
+        fetch(`//localhost:5000/getAccountInfo/42AMpjoMwKgFDxGZNRLPfIVs0nz1`)
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+
     
     useEffect(() => {
-        const getAccountInfo = async () => {
-            const response = await localhost.get(`/getAccountInfo/${user}`);
-            console.log(response.data);
-            setAccountInfo(response.data.message);
-        }
-
-        const getTransactionInfo = async () => {
-            const response = await localhost.get(`getScheduledTransactions/${accountInfo.accountID}`);
-            console.log(response.data);
-            setTransactionInfo(response.data.message);
-        }
+        getAccountInfo();
       });
 
 
 
     return(
         <>
-            <h1>{user}</h1>
+            {/* <h1>{user}</h1>
             <Account 
                 accountInfo={accountInfo}
-                user={user}
-                transactionInfo={transactionInfo} />
+                user={user}/> */}
+            <h1>{accountInfo}</h1>
         </>
     )
 }
