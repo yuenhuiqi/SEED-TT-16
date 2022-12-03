@@ -1,13 +1,24 @@
+import Transrecord from "./Transrecord";
 const AccountHeader = (props)=>{
-    const accountType = props.accountType
-    const accountId = props.accountId
-    const accountBalance = props.accountBalance
-    
+
     return(
         <div>
-            <p>Type: {accountType}</p>
-            <p>ID: {accountId}</p>
-            <p>Balance: {accountBalance}</p>
+
+            {props.account.map((trans) => 
+                    <div>
+                        
+                        <p>Type: {trans.type}</p>
+                        <p>ID: {trans.id}</p>
+                        <p>Balance: {trans.balance}</p>
+                        <Transrecord account={props.account}/> 
+                    
+
+                    </div>
+                    
+                          
+            )}
+            
+
         </div>
     )
 }
