@@ -5,6 +5,7 @@ import AccountTransaction from './components/AccountTransaction';
 import Login from './components/Login';
 import './utils/firebase';
 import { UserContextProvider, useUserContext } from './context/userContext';
+import Header from './components/Header';
 
 function App() {
   const [newTransaction, setNewTransaction] = useState(0);
@@ -16,6 +17,7 @@ function App() {
         <Login setIsLogin={setLogin} /> :
         <div className="App">
           <h1>APP</h1>
+          <Header />
           {!newTransaction ? 
             <button onClick={() => setNewTransaction(1)}>
               New transaction

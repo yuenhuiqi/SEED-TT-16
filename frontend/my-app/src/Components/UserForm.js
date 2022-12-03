@@ -19,34 +19,39 @@ const UserForm = (props) => {
     setEnteredAddress(userData.address);
   };
 
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
+  // const emailChangeHandler = (event) => {
+  //   setEnteredEmail(event.target.value);
+  // };
 
-  const addressChangeHandler = (event) => {
-    setEnteredAddress(event.target.value);
-  };
+  // const addressChangeHandler = (event) => {
+  //   setEnteredAddress(event.target.value);
+  // };
 
   return (
     <form onSubmit={submitHandler}>
       <div>
         <label>Email</label>
-        <input type="text" value={enteredEmail} onChange={emailChangeHandler} />
+        <input
+          type="text"
+          value={enteredEmail}
+          onChange={(event) => setEnteredEmail(event.target.value)}
+        />
       </div>
       <div>
         <label>Address</label>
         <input
           type="text"
           value={enteredAddress}
-          onChange={addressChangeHandler}
+          onChange={(event) => setEnteredAddress(event.target.value)}
         />
       </div>
 
       <button type="button" onClick={props.onCancel}>
         Cancel
       </button>
-      <button type="submit" onClick={submitHandler}>Save</button>
-      <buttton type="button">Close</buttton>
+      <button type="submit" onClick={submitHandler}>
+        Save
+      </button>
     </form>
   );
 };
