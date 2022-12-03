@@ -18,13 +18,8 @@ db = SQLAlchemy(app)
 def hello():
 	return jsonify({'text': "hello!"})
 
-@app.route('/getUserDetails/<user_id>', methods=['GET'])
-def getUserDetails(user_id):
-    us = User.query.filter_by(userID=user_id).first()
-    return jsonify({'userID': us.userID, 'userName': us.userName, 'role': us.role})
 
 # 1. Get list of account information based on User's ID (one user can have multiple bank account)
-
 
 
 # 2. Get list of transaction details based on User's ID (userID > accountID > Transactions)
@@ -40,7 +35,10 @@ def getUserDetails(user_id):
 
 
 # 5. GET + UPDATE of User info, based on User's ID 
-
+@app.route('/getUserDetails/<user_id>', methods=['GET'])
+def getUserDetails(user_id):
+    user = User.query.filter_by(UserID=user_id).first()
+    return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 
 
