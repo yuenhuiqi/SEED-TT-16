@@ -77,11 +77,16 @@ def addTransaction(account_id, receiving_account_id, date, transaction_amount, c
         return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
     
 # 4. Delete using TransactionID + AccountID
-@app.route('/DeleteTransaction/<account_id>/<transaction_id>', methods = ['DELETE'])
-def DeleteTransaction(account_id,transaction_id):
-    Transaction.query.filter_by(TransactionID = transaction_id).delete()
-    return jsonify(200)
-
+@app.route('/deleteTransaction/<transaction_id>', methods = ['DELETE'])
+def DeleteTransaction(transaction_id):
+    
+    try: 
+        db.session.query(Transaction).filter_by(TransactionID = transaction_id).delete()
+        db.session.commit()
+        return jsonify(200)
+    
+    except Exception as e:
+        return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
 
 # 5. GET of User info, based on User's ID 
 @app.route('/getUserDetails/<user_id>', methods=['GET'])
