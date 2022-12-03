@@ -11,7 +11,11 @@ from user import User
 from account import Account
 from transaction import Transaction
 
+import uuid
+from http import HTTPStatus
 import os
+
+from sqlalchemy import func
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 db = SQLAlchemy(app)
@@ -43,9 +47,21 @@ def getScheduledTransactions(account_id):
     return jsonify(transactionList)
 
 # 3. Insert into scheduled_transaction table Transaction ID, AccountID, ReceivingAccountID, Date, TransactionAmount, Comment
+@app.route('/addTransaction/<account_id>/<receiving_account_id>/<date>/<transaction_amount>/<comment>', methods=['POST'])
+def addTransaction(account_id, receiving_account_id, date, transaction_amount, comment):
 
-
-
+    max_num = Transaction.query.order_by(Transaction.TransactionID.desc()).first().TransactionID
+    trans_id = max_num + 1 
+    
+    try: 
+        newTrans = Transaction( TransactionID=trans_id, AccountID=account_id, ReceivingAccountID=receiving_account_id, Date=date, TransactionAmount=transaction_amount, Comment=comment)
+        db.session.add(newTrans)
+        db.session.commit()
+        return jsonify("Transaction added!")
+        
+    except Exception as e:
+        return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
+    
 # 4. Delete using TransactionID + AccountID
 @app.route('/DeleteTransaction/<account_id>/<transaction_id>', methods = ['DELETE'])
 def DeleteTransaction(account_id,transaction_id):
@@ -69,10 +85,19 @@ def getUserDetails(user_id):
     return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 # 6. UPDATE of User info, based on User's ID 
-
-
-
-
+@app.route("/updateUserInfo/<user_id>/<email>/<address>", methods=["PUT"])
+def updateUserInfo(user_id, email, address):
+    user = User.query.filter_by(UserID=user_id).first()
+    
+    try: 
+        user.Email = email
+        user.Address = address
+        db.session.commit()
+        return jsonify(200)
+    
+    except Exception as e:
+        return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
+    
 
 app.secret_key = 'seed'
 app.config['SESSION_TYPE'] = 'filesystem'
