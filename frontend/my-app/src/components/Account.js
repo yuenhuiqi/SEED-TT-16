@@ -1,6 +1,5 @@
 import AccountHeader from "./AccountHeader"
 
-import Transrecord from "./Transrecord"
 
 const Account = (props)=>{
     const accountList = props.accountList
@@ -15,7 +14,7 @@ const Account = (props)=>{
                             <AccountHeader 
                                 account = {account}/>
 
-                              <Transrecord account={account}/> 
+                            
                         </>
                     )}
 
