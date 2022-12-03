@@ -1,24 +1,23 @@
 import AccountHeader from "./AccountHeader"
 import Addtrans from './Addtrans'
+import Transrecord from "./Transrecord"
 
 const Account = (props)=>{
     const accountList = props.accountList
-    const handleAddTrans = props.handleAddTrans
     return(
 
             accountList.map((account)=>{
                     return(
                         <>
-                            <Addtrans 
+                            {/* <Addtrans 
                                 accountId={account.id}
-                                handleAddTrans={()=> handleAddTrans(id, receipient, date, amount, comments)}
-                            />
+                            /> */}
                             <AccountHeader 
                                 accountType={account.type}
                                 accountId={account.id}
                                 accountBalance={account.balance}/>
 
-                            <Transrecord account={account}/> 
+                            {/* <Transrecord account={account}/>  */}
                         </>
                     )}
 
