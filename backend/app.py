@@ -90,34 +90,30 @@ def addTransaction(account_id, receiving_account_id, date, transaction_amount, c
         return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
     
 # 4. Delete using TransactionID + AccountID
-@app.route('/DeleteTransaction/<account_id>/<transaction_id>', methods = ['DELETE'])
+@app.route('/deleteTransaction/<transaction_id>', methods = ['DELETE'])
 @check_token
-def DeleteTransaction(account_id,transaction_id):
-    transactions = Transaction.query.filter_by(AccountID=account_id)
-    idList = []
-    for trans in transactions:
-        idList.append(trans.TransactionID) 
-    #return (idList)
-    if int(transaction_id) in idList: #check if transaction id is in the account
-        db.session.delete(transactions)
+def DeleteTransaction(transaction_id):
+    
+    try: 
+        db.session.query(Transaction).filter_by(TransactionID = transaction_id).delete()
         db.session.commit()
-        return jsonify(message = "Transaction deleted.")
-    else:
-        return jsonify(message="Transaction does not exist.")
-
+        return jsonify(200)
+    
+    except Exception as e:
+        return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
 
 # 5. GET of User info, based on User's ID 
-@app.route('/getUserDetails/<user_id>', methods=['GET'])
+@app.route('/getUserDetails/<auth_id>', methods=['GET'])
 @check_token
-def getUserDetails(user_id):
-    user = User.query.filter_by(UserID=user_id).first()
+def getUserDetails(auth_id):
+    user = User.query.filter_by(AuthID=auth_id).first()
     return jsonify({'firstName': user.Firstname, 'lastName': user.Lastname, 'email': user.Email, 'address': user.Address})
 
 # 6. UPDATE of User info, based on User's ID 
-@app.route("/updateUserInfo/<user_id>/<email>/<address>", methods=["PUT"])
+@app.route("/updateUserInfo/<auth_id>/<email>/<address>", methods=["PUT"])
 @check_token
-def updateUserInfo(user_id, email, address):
-    user = db.session.query(User).filter_by(UserID=user_id).first()
+def updateUserInfo(auth_id, email, address):
+    user = db.session.query(User).filter_by(AuthID=auth_id).first()
     try: 
         user.Email = email
         user.Address = address

@@ -11,8 +11,9 @@ class User(db.Model):
     Email = db.Column(db.String(255), nullable=False, unique = True)
     Address = db.Column(db.String(255), nullable=False)
     OptIntoPhyStatements = db.Column(db.Integer(), nullable=False)
+    AuthID = db.Column(db.String(255), nullable=False)
 
-    def __init__(self, UserID, Username, Password, Firstname, Lastname, Email, Address, OptIntoPhyStatements):
+    def __init__(self, UserID, Username, Password, Firstname, Lastname, Email, Address, OptIntoPhyStatements, AuthID):
         self.UserID = UserID
         self.Username = Username
         self.Password = Password
@@ -21,4 +22,5 @@ class User(db.Model):
         self.Email = Email
         self.Address = Address
         self.OptIntoPhyStatements = OptIntoPhyStatements
+        self.AuthID = AuthID
 
