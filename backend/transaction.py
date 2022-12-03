@@ -3,19 +3,19 @@ from database import *
 class Transaction(db.Model):
     __tablename__ = 'ScheduledTransactions'
 
-    transactionID = db.Column(db.Integer(), primary_key=True)
-    accountID = db.Column(db.Integer(), primary_key=True)
-    receivingAccountID = db.Column(db.Integer(), nullable = False)
-    date = db.Column(db.String(255), nullable = False)
-    transactionAmount = db.Column(db.Float(), nullable = False)
-    comment = db.Column(db.String(255), nullable = False)
+    TransactionID = db.Column(db.Integer(), primary_key=True)
+    AccountID = db.Column(db.Integer(), primary_key=True)
+    ReceivingAccountID = db.Column(db.Integer(), nullable = False)
+    Date = db.Column(db.String(255), nullable = False)
+    TransactionAmount = db.Column(db.Float(), nullable = False)
+    Comment = db.Column(db.String(255), nullable = False)
   
-    def __init__(self, transactionID, accountID, receivingAccountID, date, transactionAmount, comment):
-        self.transactionID = transactionID
-        self.accountID = accountID
-        self.receivingAccountID = receivingAccountID
-        self.date = date
-        self.transactionAmount = transactionAmount
-        self.comment = comment
+    def __init__(self, TransactionID, AccountID, ReceivingAccountID, Date, TransactionAmount, Comment):
+        self.TransactionID = TransactionID
+        self.AccountID = AccountID
+        self.ReceivingAccountID = ReceivingAccountID
+        self.Date = Date
+        self.TransactionAmount = TransactionAmount
+        self.Comment = Comment
         
         

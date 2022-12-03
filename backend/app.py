@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from user import User
 from account import Account
+from transaction import Transaction
 
 import os
 
@@ -31,12 +32,15 @@ def getAllAccounts(user_id):
     return jsonify(accList) 
 
 
-# 2. Get list of transaction details based on User's ID (userID > accountID > Transactions)
-@app.route('/Scheduled_Transactions/<user_id>', methods=['GET'])
-def Scheduled_Transactions(user_id:int):
-    account = Account.query.filter_by(userID=user_id)
+# 2. Get list of transaction details based on User's ID (accountID > Transactions)
+@app.route('/getScheduledTransactions/<account_id>', methods=['GET'])
+def getScheduledTransactions(account_id):
     
-
+    transactions = Transaction.query.filter_by(AccountID=account_id)
+    transactionList = []
+    for trans in transactions:
+        transactionList.append({'date': trans.Date, 'receivingAccountID': trans.ReceivingAccountID, 'transactionAmount': trans.TransactionAmount, 'comment': trans.Comment})
+    return jsonify(transactionList)
 
 # 3. Insert into scheduled_transaction table Transaction ID, AccountID, ReceivingAccountID, Date, TransactionAmount, Comment
 
