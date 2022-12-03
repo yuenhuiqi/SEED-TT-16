@@ -1,9 +1,9 @@
 import Transrecord from "./Transrecord";
 const AccountHeader = (props)=>{
-    const handleDelete = (transId,user) => {
-        /* api call to delete transaction*/
+    // const handleDelete = (transId,user) => {
+    //     /* api call to delete transaction*/
 
-    }
+    // }
     const accountInfo = props.accountInfo
     return(
         <div>
@@ -14,7 +14,7 @@ const AccountHeader = (props)=>{
                         <p>Type: {accountInfo.accountType}</p>
                         <p>ID: {accountInfo.accountID}</p>
                         <p>Balance: {accountInfo.accountBalance}</p>
-                        <Transrecord account={props.account}/> 
+                        <Transrecord transactionInfo={props.transactionInfo}/> 
                     
 
                     </div>
