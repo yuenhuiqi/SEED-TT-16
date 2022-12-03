@@ -3,14 +3,12 @@ import {useState} from 'react'
 
 
 const AccountTransaction = (props)=>{
-    const [account, useAccount] = useState({})
-
-
+    const [accountList, useAccountList] = useState([])
 
     return(
         <>
             <Addtrans />
-            <Account />
+            <Account accountList={accountList}/>
         </>
     )
 }
