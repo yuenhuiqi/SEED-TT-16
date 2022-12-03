@@ -4,25 +4,31 @@ import NewTransaction from './components/NewTransaction';
 import AccountTransaction from './components/AccountTransaction';
 import Login from './components/Login';
 import './utils/firebase';
-import { UserContextProvider } from './context/userContext';
+import { UserContextProvider, useUserContext } from './context/userContext';
 
 function App() {
   const [newTransaction, setNewTransaction] = useState(0);
+  const [login, setLogin] = useState(0);
+
   return (
     <UserContextProvider>
-      <Login />
+      {!login ? 
+        <Login setIsLogin={setLogin} /> :
+        <div className="App">
+          <h1>APP</h1>
+          {!newTransaction ? 
+            <button onClick={() => setNewTransaction(1)}>
+              New transaction
+            </button>:
+            <NewTransaction />}
+          {/* <AccountTransaction /> */}
+        </div>
+      }
+      {/* {!login ?
+        <Login setIsLogin={setLogin} /> :
+        <h1>test</h1>
+      } */}
     </UserContextProvider>
-  );
-  return (
-    <div className="App">
-      <h1>APP</h1>
-      {!newTransaction ? 
-        <button onClick={() => setNewTransaction(1)}>
-          New transaction
-        </button>:
-        <NewTransaction />}
-      <AccountTransaction />
-    </div>
   );
 }
 
