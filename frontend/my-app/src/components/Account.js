@@ -2,7 +2,7 @@ import AccountHeader from "./AccountHeader"
 
 
 const Account = (props)=>{
-    const accountList = props.accountList
+    const accountInfo = props.accountInfo
     return(
 
             accountList.map((account)=>{
@@ -10,7 +10,7 @@ const Account = (props)=>{
                         <>
 
                             <AccountHeader 
-                                account = {account}/>
+                                accountInfo = {accountInfo}/>
 
                             
                         </>
