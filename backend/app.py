@@ -7,13 +7,19 @@ from database import app
 from flask_api import status
 from flask_sqlalchemy import SQLAlchemy
 
+import firebase_admin
+from firebase_admin import credentials
+
 from user import User
 from account import Account
 
 import os
 
+cred = credentials.Certificate("path/to/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
 app.config['CORS_HEADERS'] = 'Content-Type'
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 @app.route('/')
 def hello():
