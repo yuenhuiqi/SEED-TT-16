@@ -23,6 +23,27 @@ def getUserDetails(user_id):
     us = User.query.filter_by(userID=user_id).first()
     return jsonify({'userID': us.userID, 'userName': us.userName, 'role': us.role})
 
+# 1. Get list of account information based on User's ID (one user can have multiple bank account)
+
+
+
+# 2. Get list of transaction details based on User's ID (userID > accountID > Transactions)
+
+
+
+# 3. Insert into scheduled_transaction table Transaction ID, AccountID, ReceivingAccountID, Date, TransactionAmount, Comment
+
+
+
+# 4. Delete using TransactionID + AccountID
+
+
+
+# 5. GET + UPDATE of User info, based on User's ID 
+
+
+
+
 
 app.secret_key = 'seed'
 app.config['SESSION_TYPE'] = 'filesystem'
