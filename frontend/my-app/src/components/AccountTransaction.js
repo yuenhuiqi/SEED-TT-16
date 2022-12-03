@@ -1,21 +1,40 @@
 import Account from './Account.js'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useUserContext } from '../context/userContext.js';
+import localhost from '../localhost.js';
 
 
 
 const AccountTransaction = (props)=>{
 
-    const {user} = useUserContext();
-    const [accountList, useAccountList] = useState([[{id: 123, type: "abc", balance:12345 ,date: '17 Oct 2010', receipient: 241241, amount: 12331, comment:'testing'},
-     {id:1234, type: "test", balance: 2321, date: '17 Oct 2012', receipient: 241241, amount: 12331, comment:'testing'}]])
+    let {user} = useUserContext();
+ 
+    
+     const [accountInfo, setAccountInfo] = useState("")
+
+     const getAccountInfo = async () => {
+        // const response = await localhost.get(`/getAccountInfo/${user}`);
+        // console.log(response.data);
+        // setAccountInfo(response.data);
+        fetch(`//localhost:5000/getAccountInfo/42AMpjoMwKgFDxGZNRLPfIVs0nz1`)
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+
+    
+    useEffect(() => {
+        getAccountInfo();
+      });
+
 
 
     return(
         <>
-            <h1>{user}</h1>
+            {/* <h1>{user}</h1>
             <Account 
-                accountList={accountList} />
+                accountInfo={accountInfo}
+                user={user}/> */}
+            <h1>{accountInfo}</h1>
         </>
     )
 }

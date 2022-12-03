@@ -9,7 +9,7 @@ import Header from './components/Header';
 
 function App() {
   const [newTransaction, setNewTransaction] = useState(0);
-  const [login, setLogin] = useState(0);
+  const [login, setLogin] = useState(1);
 
   return (
     <UserContextProvider>
@@ -23,7 +23,7 @@ function App() {
               New transaction
             </button>:
             <NewTransaction />}
-          {/* <AccountTransaction /> */}
+          <AccountTransaction />
         </div>
       }
       {/* {!login ?
