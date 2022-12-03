@@ -1,3 +1,6 @@
+var admin = require('firebase-admin');
+var bodyParser = require('body-parser');
+var serviceAccount = require('./fbAdminConfig.json');
 const express = require('express');
 const mysql = require('./config/mysqlConfig.js');
 
@@ -18,6 +21,13 @@ mysql.connection.connect((err) => {
 //   connection.end();
 
 const app = express();
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
