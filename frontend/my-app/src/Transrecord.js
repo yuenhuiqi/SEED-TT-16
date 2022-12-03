@@ -30,15 +30,16 @@ const Transrecord = (props)=>{
                 </tr>
             </thead>
             <tbody>
-                {account.map(trans) => {
+                {account.map((trans) => {
                     return (
                         <tr>
                             <th scope="row">14/9/2022</th>
                             <td>Mark</td>
                             <td>50</td>
                             <td>hello</td>
-                        </tr>
-                    )}}
+                        </tr>)
+                    })
+                }
             </tbody>
         </table>
         <br> </br> 
