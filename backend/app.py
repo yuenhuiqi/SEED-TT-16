@@ -71,7 +71,7 @@ def addTransaction(account_id, receiving_account_id, date, transaction_amount, c
         newTrans = Transaction( TransactionID=trans_id, AccountID=account_id, ReceivingAccountID=receiving_account_id, Date=date, TransactionAmount=transaction_amount, Comment=comment)
         db.session.add(newTrans)
         db.session.commit()
-        return jsonify("Transaction added!")
+        return jsonify(200)
         
     except Exception as e:
         return str(e), HTTPStatus.INTERNAL_SERVER_ERROR 
@@ -101,8 +101,7 @@ def getUserDetails(user_id):
 # 6. UPDATE of User info, based on User's ID 
 @app.route("/updateUserInfo/<user_id>/<email>/<address>", methods=["PUT"])
 def updateUserInfo(user_id, email, address):
-    user = User.query.filter_by(UserID=user_id).first()
-    
+    user = db.session.query(User).filter_by(UserID=user_id).first()
     try: 
         user.Email = email
         user.Address = address
